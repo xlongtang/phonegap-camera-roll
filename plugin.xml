@@ -12,7 +12,7 @@
   </engines>
 
   <js-module src="www/CameraRoll.js" name="CameraRoll">
-    <clobbers target="navigator.CameraRoll" />
+    <clobbers target="navigator.cameraRoll" />
   </js-module>
 
   <!-- ios -->
