@@ -1,7 +1,5 @@
 # PhoneGap CameraRoll plugin
 
-## Description
-
 This plugin allows you to use photos from the cameraroll (photo album) of the mobile device.
 
 * You can count the total number of photos and/or videos.
