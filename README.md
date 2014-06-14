@@ -1,9 +1,5 @@
 # PhoneGap CameraRoll plugin
 
-> WARNING: April 12th, 2014: this plugin is in a dormant state. It only supports iOS a little. You're better off not using this. I may pick this up in the future... but for now: look elsewhere.
-
-for iOS, by [Eddy Verbruggen](http://www.x-services.nl)
-
 1. [Description](https://github.com/EddyVerbruggen/CameraRoll-PhoneGap-Plugin#1-description)
 2. [Installation](https://github.com/EddyVerbruggen/CameraRoll-PhoneGap-Plugin#2-installation)
 	2. [Automatically (CLI / Plugman)](https://github.com/EddyVerbruggen/CameraRoll-PhoneGap-Plugin#automatically-cli--plugman)
@@ -16,8 +12,6 @@ for iOS, by [Eddy Verbruggen](http://www.x-services.nl)
 
 This plugin allows you to use photos from the cameraroll (photo album) of the mobile device.
 
-* Compatible with [Cordova Plugman](https://github.com/apache/cordova-plugman) and ready for PhoneGap 3.0
-* Submitted and waiting for approval at PhoneGap Build ([more information](https://build.phonegap.com/plugins))
 * You can count the total number of photos and/or videos.
 * You can find photos only (videos would likely crash your app).
 * You can limit the number of returned photos by passing a `max` parameter.
@@ -29,77 +23,14 @@ This plugin allows you to use photos from the cameraroll (photo album) of the mo
 ### Android specifics
 * Work in progress.. support will be added soon
 
-## 2. Installation
-
-### Automatically (CLI / Plugman)
-Calendar is compatible with [Cordova Plugman](https://github.com/apache/cordova-plugman) and ready for the [PhoneGap 3.0 CLI](http://docs.phonegap.com/en/3.0.0/guide_cli_index.md.html#The%20Command-line%20Interface_add_features), here's how it works with the CLI:
+##Installation
 
 ```
-$ phonegap local plugin add https://github.com/EddyVerbruggen/CameraRoll-PhoneGap-Plugin.git
-```
-or
-```
-$ cordova plugin add https://github.com/EddyVerbruggen/CameraRoll-PhoneGap-Plugin.git
-```
-don't forget to run this command afterwards:
-```
-$ cordova build
-```
-
-### Manually
-
-1\. Add the following xml to your `config.xml`:
-```xml
-<!-- for iOS -->
-<feature name="CameraRoll">
-	<param name="ios-package" value="CameraRoll" />
-</feature>
-```
-
-```xml
-<!-- for Android as plugin (deprecated) -->
-<plugin name="Calendar" value="nl.xservices.plugins.CameraRoll"/>
-```
-
-```xml
-<!-- for Android as feature -->
-<feature name="CameraRoll">
-  <param name="android-package" value="nl.xservices.plugins.CameraRoll" />
-</feature>
-```
-
-2\. Grab a copy of CameraRoll.js, add it to your project and reference it in `index.html`:
-```html
-<script type="text/javascript" src="js/CameraRoll.js"></script>
-```
-
-3\. Download the source files for iOS and/or Android and copy them to your project.
-
-iOS: Copy the four `.h` and `.m` to `platforms/ios/<ProjectName>/Plugins`
-
-Android: Copy `CameraRoll.java` to `platforms/android/src/nl/xservices/plugins` (create the folders)
-
-### PhoneGap Build
-
-Using CameraRoll with PhoneGap Build requires these simple steps:
-
-1\. Add the following xml to your `config.xml` to always use the latest version of this plugin:
-```xml
-<gap:plugin name="nl.x-services.plugins.cameraroll" />
-```
-or to use this exact version:
-```xml
-<gap:plugin name="nl.x-services.plugins.cameraroll" version="1.0" />
-```
-
-2\. Reference the JavaScript code in your `index.html`:
-```html
-<!-- below <script src="phonegap.js"></script> -->
-<script src="js/plugins/CameraRoll.js"></script>
+$ phonegap local plugin add org.mantis.cameraroll
 ```
 
 
-## 3. Usage
+##Usage
 
 Counting the number of photos in the photo library:
 
@@ -130,7 +61,7 @@ Find and show max 10 photos from the photo library:
 ```
 
 
-## 4. License
+##License
 
 [The MIT License (MIT)](http://www.opensource.org/licenses/mit-license.html)
 
