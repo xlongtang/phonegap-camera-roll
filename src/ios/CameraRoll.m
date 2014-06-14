@@ -5,11 +5,10 @@
 @implementation CameraRoll
 
 
--(void)count:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options {
-    
-    NSString *callbackId = [arguments pop];
-    BOOL includePhotos   = [[arguments objectAtIndex:0] boolValue];
-    BOOL includeVideos   = [[arguments objectAtIndex:1] boolValue];
+- (void) count:(CDVInvokedUrlCommand*)command {
+
+    BOOL includePhotos   = [command.arguments objectAtIndex:0];
+    BOOL includeVideos   = [command.arguments objectAtIndex:1];
 
     ALAssetsFilter *filter;
     if (includePhotos && includeVideos) {
@@ -36,7 +35,7 @@
                                CDVPluginResult* result = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsInt:numAssets];
                                [self writeJavascript:[result toSuccessCallbackString:callbackId]];
                            }
-     
+
                          failureBlock:^(NSError *err) {
                              CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_NO_RESULT];
                              [self writeJavascript:[result toErrorCallbackString:callbackId]];
@@ -44,11 +43,11 @@
 }
 
 
--(void)find:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options {
+- (void) find:(CDVInvokedUrlCommand*)command {
 
     NSString *callbackId = [arguments pop];
     NSInteger max        = [[arguments objectAtIndex:0] integerValue];
-    
+
     NSMutableArray *photos = [[NSMutableArray alloc] init];
     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
     [library enumerateGroupsWithTypes:ALAssetsGroupAll

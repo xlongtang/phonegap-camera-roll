@@ -1,0 +1,17 @@
+{
+    "version": "1.0.0",
+    "name": "org.mantis.cameraroll",
+    "cordova_name": "CameraRoll",
+    "description": "This plugin allows allows you to retrieve images from the cameraroll.",
+    "license": "MIT",
+    "platforms": [
+        "ios",
+        "android"
+    ],
+    "engines": [
+        {
+            "name": "cordova",
+            "version": ">=2.5.0"
+        }
+    ]
+}
