@@ -1,14 +1,6 @@
 # PhoneGap CameraRoll plugin
 
-1. [Description](https://github.com/EddyVerbruggen/CameraRoll-PhoneGap-Plugin#1-description)
-2. [Installation](https://github.com/EddyVerbruggen/CameraRoll-PhoneGap-Plugin#2-installation)
-	2. [Automatically (CLI / Plugman)](https://github.com/EddyVerbruggen/CameraRoll-PhoneGap-Plugin#automatically-cli--plugman)
-	2. [Manually](https://github.com/EddyVerbruggen/CameraRoll-PhoneGap-Plugin#manually)
-	2. [PhoneGap Build](https://github.com/EddyVerbruggen/CameraRoll-PhoneGap-Plugin#phonegap-build)
-3. [Usage](https://github.com/EddyVerbruggen/CameraRoll-PhoneGap-Plugin#3-usage)
-4. [License](https://github.com/EddyVerbruggen/CameraRoll-PhoneGap-Plugin#5-license)
-
-## 1. Description
+## Description
 
 This plugin allows you to use photos from the cameraroll (photo album) of the mobile device.
 
