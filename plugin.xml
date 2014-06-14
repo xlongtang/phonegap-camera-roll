@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-      	xmlns:android="http://schemas.android.com/apk/res/android"
-        id="nl.x-services.plugins.cameraroll"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+        id="org.mantis.cameraroll"
         version="0.1">
-
   <name>CameraRoll</name>
 
   <description>
@@ -16,21 +15,22 @@
     <engine name="cordova" version=">=2.5.0"/>
   </engines>
 
-  <asset src="www/CameraRoll.js" target="js/plugins/CameraRoll.js"/>
+  <js-module src="www/CameraRoll.js" name="CameraRoll">
+    <clobbers target="navigator.CameraRoll" />
+  </js-module>
 
   <!-- ios -->
- 	<platform name="ios">
- 		<config-file target="config.xml" parent="/*">
- 			<feature name="CameraRoll">
- 				<param name="ios-package" value="CameraRoll" />
- 			</feature>
- 		</config-file>
- 		<header-file src="src/ios/CameraRoll.h" />
- 		<source-file src="src/ios/CameraRoll.m" />
- 		<source-file src="src/ios/NSData+Base64.h" />
- 		<source-file src="src/ios/NSData+Base64.m" />
-		<!--<framework src="EventKit.framework" />-->
- 	</platform>
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="CameraRoll">
+        <param name="ios-package" value="CameraRoll" />
+      </feature>
+    </config-file>
+    <header-file src="src/ios/CameraRoll.h" />
+    <source-file src="src/ios/CameraRoll.m" />
+    <header-file src="src/ios/NSData+Base64.h" />
+    <source-file src="src/ios/NSData+Base64.m" />
+  </platform>
 
   <!-- android -->
   <platform name="android">
