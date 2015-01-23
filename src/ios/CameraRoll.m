@@ -44,9 +44,14 @@
 
 - (void) find:(CDVInvokedUrlCommand*)command {
     NSInteger max = [[command.arguments objectAtIndex:0] integerValue];
-
+    double startTimeTick = [[command.arguments objectAtIndex:1] doubleValue];
+    NSDate *startTime = [NSDate dateWithTimeIntervalSince1970:startTimeTick];
+    __block NSDate *latestTime = startTime;
+    
     NSMutableArray *photos = [[NSMutableArray alloc] init];
+    NSMutableArray *photoUrls = [[NSMutableArray alloc] init];
     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    
     [library enumerateGroupsWithTypes:ALAssetsGroupAll
                         usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
                             if (group == nil) {
@@ -57,27 +62,45 @@
                                 if (result == nil) {
                                     return;
                                 }
+                                
+                                NSDate * date = [result valueForProperty:ALAssetPropertyDate];
+                                if ([startTime compare:date] == NSOrderedDescending) {
+                                    *innerStop = YES;
+                                    return;
+                                }
+                                
+                                if ([date compare:latestTime] == NSOrderedDescending) {
+                                    latestTime = date;
+                                }
+                                
                                 NSURL *urld = (NSURL*) [[result defaultRepresentation]url];
                                 NSData *imageData = [NSData dataWithContentsOfURL:urld];
                                 NSString *base64EncodedImage = [imageData base64EncodedString];
 
                                 [photos addObject:base64EncodedImage];
+                                [photoUrls addObject:urld];
                                 if (photos.count == max) {
                                     *innerStop = YES;
                                 }
                             }];
 
                             if (photos.count > 0) {
-                                CDVPluginResult* result = [CDVPluginResult resultWithStatus: CDVCommandStatus_OK messageAsArray:photos];
-                                [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+                              // Building return data
+                                NSMutableDictionary *resultDict = [NSMutableDictionary dictionaryWithCapacity:3];
+                                [resultDict setObject:photos forKey:@"photos"];
+                                [resultDict setObject:photoUrls forKey:@"urls"];
+                                double latestTimeTick = [latestTime timeIntervalSince1970];
+                                [resultDict setObject:[NSNumber numberWithDouble:latestTimeTick] forKey:@"timestamp"];
+                              CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:resultDict];
+                              [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
                             } else {
-                                CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_NO_RESULT];
-                                [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+                              CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+                              [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
                             }
                         } failureBlock:^(NSError *error) {
                             NSLog(@"%@", [error localizedDescription]);
-                            CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_NO_RESULT];
-                            [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+                            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:error.localizedDescription];
+                            [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
                         }];
 }
 
